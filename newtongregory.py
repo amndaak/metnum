@@ -15,7 +15,11 @@ if "reset" not in st.session_state:
     st.session_state.reset = False
 
 if st.button("🔄 Reset Semua Input"):
-    st.session_state.reset = True
+    # Hapus semua key session_state yang dipakai buat inputan
+    keys_to_clear = [f"x{i}" for i in range(20)] + [f"y{i}" for i in range(20)] + ["n_input", "x_interp", "reset"]
+    for key in keys_to_clear:
+        if key in st.session_state:
+            del st.session_state[key]
     st.experimental_rerun()
 
 if not st.session_state.reset:
