@@ -16,10 +16,10 @@ def reset_state():
     for key in keys:
         if key in st.session_state:
             del st.session_state[key]
+    st.experimental_rerun()
 
 if st.button("🔄 Reset Semua Input"):
     reset_state()
-    st.experimental_rerun()
 
 if not st.session_state.reset:
     st.subheader("📥 Input Data")
