@@ -11,21 +11,15 @@ st.title("🔢 Interpolasi Newton-Gregory")
 st.markdown("Masukin data titik-titik yang diketahui, pilih metode interpolasi, terus cari nilai f(x) yang lo butuhin!")
 
 # Tombol reset
-st.session_state['x_vals']
-st.session_state['y_vals']
-
-if 'x_values' not in st.session_state:
-    st.session_state['x_vals'] = []
-if 'y_values' not in st.session_state:
-    st.session_state['y_vals'] = []
+def reset_state():
+    keys = [f"x{i}" for i in range(20)] + [f"y{i}" for i in range(20)] + ["n_input", "x_interp", "method"]
+    for key in keys:
+        if key in st.session_state:
+            del st.session_state[key]
 
 if st.button("🔄 Reset Semua Input"):
-    st.session_state['x_vals'] = []
-    st.session_state['y_vals'] = []
-    st.success("Data sudah direset")
-
-if 'interpolate_at' in st.session_state:
-    del st.session_state['interpolate_at']
+    reset_state()
+    st.experimental_rerun()
 
 if not st.session_state.reset:
     st.subheader("📥 Input Data")
