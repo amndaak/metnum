@@ -13,11 +13,10 @@ st.markdown("Masukin data titik-titik yang diketahui, pilih metode interpolasi, 
 # Tombol reset
 def reset_state():
     keys = [f"x{i}" for i in range(20)] + [f"y{i}" for i in range(20)] + ["n_input", "x_interp", "method"]
-    for key in keys:
-        if key in st.session_state:
-            del st.session_state[key]
+    for key in list(st.session_state.keys()):
+        del st.session_state[key]
     st.rerun()
-
+    
 if st.button("🔄 Reset Semua Input"):
     reset_state()
 
