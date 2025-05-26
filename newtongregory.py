@@ -21,7 +21,7 @@ def reset_state():
 if st.button("🔄 Reset Semua Input"):
     reset_state()
 
-if not st.session_state.reset:
+if not st.session_state:
     st.subheader("📥 Input Data")
 
     n = st.number_input("Jumlah data (minimal 2)", min_value=2, max_value=20, value=4, step=1, key="n_input")
