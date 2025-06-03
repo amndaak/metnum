@@ -11,7 +11,7 @@ st.title("🔢 Interpolasi Newton-Gregory")
 st.markdown("Masukin data titik-titik yang diketahui, pilih metode interpolasi, terus cari nilai f(x) yang lo butuhin!")
 
 n = st.number_input("Jumlah data (minimal 2)", min_value=2, max_value=20, value=4, step=1, key="n_input")
-mmmmmm
+
 with st.form("data_form"):
     x_vals = []
     y_vals = []
