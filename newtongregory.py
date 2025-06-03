@@ -8,7 +8,7 @@ import matplotlib.pyplot as plt
 import io
 
 st.title("🔢 Interpolasi Newton-Gregory")
-st.markdown("Masukin data titik-titik yang diketahui, pilih metode interpolasi, terus cari nilai f(x) yang lo butuhin!")
+st.markdown("Masukkan data titik-titik yang diketahui, pilih metode interpolasi, lalu cari nilai f(x) yang dibutuhkan!")
 
 n = st.number_input("Jumlah data (minimal 2)", min_value=2, max_value=20, value=4, step=1, key="n_input")
 
