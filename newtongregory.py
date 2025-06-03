@@ -60,54 +60,54 @@ if submitted:
                 if len(df_table[i]) > 0:
                     p_term *= (p - i + 1)
                     result += (p_term * df_table[i][0]) / math.factorial(i)
-                else:
-                    p = (x_interp - x_vals[-1]) / h
-                    result = y_vals[-1]
-                    p_term = 1
-                    for i in range(1, len(df_table)):
-                        if len(df_table[i]) > 0:
-                            p_term *= (p + i - 1)
-                            result += (p_term * df_table[i][-1]) / math.factorial(i)
+        else:
+            p = (x_interp - x_vals[-1]) / h
+            result = y_vals[-1]
+            p_term = 1
+            for i in range(1, len(df_table)):
+                if len(df_table[i]) > 0:
+                    p_term *= (p + i - 1)
+                    result += (p_term * df_table[i][-1]) / math.factorial(i)
 
-                st.subheader("🧮 Hasil Interpolasi")
-                st.success(f"f({x_interp}) ≈ {result}")
+        st.subheader("🧮 Hasil Interpolasi")
+        st.success(f"f({x_interp}) ≈ {result}")
 
-                # Grafik
-                st.subheader("📈 Grafik Interpolasi")
-                x_plot = np.linspace(min(x_vals), max(x_vals), 200)
-                y_plot = []
+        # Grafik
+        st.subheader("📈 Grafik Interpolasi")
+        x_plot = np.linspace(min(x_vals), max(x_vals), 200)
+        y_plot = []
 
-                for xp in x_plot:
-                    if method == "Newton-Gregory Maju":
-                        p = (xp - x_vals[0]) / h
-                        yp = y_vals[0]
-                        p_term = 1
-                        for i in range(1, len(df_table)):
-                            if len(df_table[i]) > 0:
-                                p_term *= (p - i + 1)
-                                yp += (p_term * df_table[i][0]) / math.factorial(i)
-                    else:
-                        p = (xp - x_vals[-1]) / h
-                        yp = y_vals[-1]
-                        p_term = 1
-                        for i in range(1, len(df_table)):
-                            if len(df_table[i]) > 0:
-                                p_term *= (p + i - 1)
-                                yp += (p_term * df_table[i][-1]) / math.factorial(i)
-                    y_plot.append(yp)
+        for xp in x_plot:
+            if method == "Newton-Gregory Maju":
+                p = (xp - x_vals[0]) / h
+                yp = y_vals[0]
+                p_term = 1
+                for i in range(1, len(df_table)):
+                    if len(df_table[i]) > 0:
+                        p_term *= (p - i + 1)
+                        yp += (p_term * df_table[i][0]) / math.factorial(i)
+            else:
+                p = (xp - x_vals[-1]) / h
+                yp = y_vals[-1]
+                p_term = 1
+                for i in range(1, len(df_table)):
+                    if len(df_table[i]) > 0:
+                        p_term *= (p + i - 1)
+                        yp += (p_term * df_table[i][-1]) / math.factorial(i)
+            y_plot.append(yp)
 
-                fig, ax = plt.subplots()
-                ax.plot(x_plot, y_plot, label="Interpolasi", color="blue")
-                ax.scatter(x_vals, y_vals, color="red", label="Titik Data")
-                ax.axvline(x_interp, color="green", linestyle="--", label=f"x = {x_interp}")
-                ax.scatter([x_interp], [result], color="purple", label="Hasil Interpolasi")
-                ax.set_xlabel("x")
-                ax.set_ylabel("f(x)")
-                ax.set_title("Grafik Interpolasi Newton-Gregory")
-                ax.legend()
-                st.pyplot(fig)
+        fig, ax = plt.subplots()
+        ax.plot(x_plot, y_plot, label="Interpolasi", color="blue")
+        ax.scatter(x_vals, y_vals, color="red", label="Titik Data")
+        ax.axvline(x_interp, color="green", linestyle="--", label=f"x = {x_interp}")
+        ax.scatter([x_interp], [result], color="purple", label="Hasil Interpolasi")
+        ax.set_xlabel("x")
+        ax.set_ylabel("f(x)")
+        ax.set_title("Grafik Interpolasi Newton-Gregory")
+        ax.legend()
+        st.pyplot(fig)
 
-                # Tombol download grafik
-                buf = io.BytesIO()
-                fig.savefig(buf, format="png")
-                st.download_button("⬇️ Download Grafik", buf.getvalue(), file_name="grafik_interpolasi.png", mime="image/png")
+        # Tombol download grafik (kasih key biar unik)
+        buf = io.BytesIO()
+        fig.savefig(buf, format="png")
+        st.download_button("⬇️ Download Grafik", buf.getvalue(), file_name="grafik_interpolasi.png", mime="image/png", key="download_grafik")
